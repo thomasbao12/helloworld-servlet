@@ -15,6 +15,7 @@
  */
 
 package com.example.appengine.gettingstartedjava.helloworld;
+import static com.example.appengine.gettingstartedjava.helloworld.LinkScrapeUtil.getLinkShare;
 
 import com.google.firebase.*; 
 import com.google.firebase.database.*; 
@@ -35,6 +36,13 @@ public class HelloServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    PrintWriter out = resp.getWriter();
+    try {
+      out.println(LinkScrapeUtil.getLinkShare("http://www.flickr.com").toString());   
+    } catch (Exception _) { 
+      out.println("failed");
+    }
+    /*
     FirebaseOptions options = new FirebaseOptions.Builder()
       .setServiceAccount(new FileInputStream("credentials/ChatChat-07ec3525e4ef.json"))
       .setDatabaseUrl("https://chatchat-52b7e.firebaseio.com/")
@@ -48,6 +56,7 @@ public class HelloServlet extends HttpServlet {
     ref.child("test").setValue("test");
     PrintWriter out = resp.getWriter();
     out.println("Hello, world");
+    */
   }
 }
 // [END example]
