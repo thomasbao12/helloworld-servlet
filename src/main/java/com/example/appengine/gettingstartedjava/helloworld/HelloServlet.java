@@ -37,8 +37,13 @@ public class HelloServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     PrintWriter out = resp.getWriter();
+    String uri = req.getRequestURI();
+    if (uri.length() <= 1) {
+      return;
+    }
+    String link = uri.substring(1);
     try {
-      out.println(LinkScrapeUtil.getLinkShare("http://www.flickr.com").toString());   
+      out.println(LinkScrapeUtil.getLinkShare(link).toString());   
     } catch (Exception _) { 
       out.println("failed");
     }
